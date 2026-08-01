@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { Sidebar } from './Sidebar';
+import { cockpitTheme } from './cockpitTheme';
 import { Dock, DockIcon } from '@/shared/ui/premium/Dock';
 import { mobileNav } from './navItems';
 
@@ -33,11 +34,11 @@ export function NavigationSystem({ isSanctuaryActive = false }: NavigationSystem
                 {...slideProps}
                 className="w-auto max-w-[92vw] pointer-events-auto"
             >
-                <nav aria-label="Navigation">
+                <nav aria-label="Primary">
                     <Dock
                         magnification={48}
                         distance={96}
-                        className="max-w-[calc(100vw-1.5rem)] gap-1 border-white/10 bg-[#0D0C12]/92 px-2 py-2 backdrop-blur-xl"
+                        className={`max-w-[calc(100vw-1.5rem)] gap-1 ${cockpitTheme.surfaceDock} px-2 py-2 backdrop-blur-xl`}
                     >
                         {mobileNav.map((item) => {
                             const active = pathname === item.path;
@@ -51,7 +52,7 @@ export function NavigationSystem({ isSanctuaryActive = false }: NavigationSystem
                                     magnification={48}
                                     distance={96}
                                 >
-                                    <item.icon className={active ? "size-6 text-[#B7A7FF]" : "size-6 text-zinc-300"} />
+                                    <item.icon className={active ? `size-6 ${cockpitTheme.accentText}` : "size-6 text-zinc-300"} />
                                 </DockIcon>
                             );
                         })}

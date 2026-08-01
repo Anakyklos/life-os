@@ -10,7 +10,7 @@
     --surface-highlight: 240 5% 10%;
     
     --foreground: 0 0% 93%;
-    --primary: 210 79% 55%; /* #308ce8 */
+    --primary: 210 79% 55%; /* #308ce8 - text/accent token; CTA background uses primary-cta */
     --primary-foreground: 0 0% 100%;
 
     --muted: 240 3.7% 15.9%;
@@ -408,4 +408,9 @@
 }
 [data-font-scale="2xl"] {
   --font-scale: var(--font-scale-2xl);
+}
+
+/* Make the user-configured font scale actually resize the interface */
+html[data-font-scale] {
+  font-size: calc(100% * var(--font-scale));
 }

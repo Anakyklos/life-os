@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/shared/lib/cn';
 import { primaryNav, secondaryNav } from './navItems';
+import { cockpitTheme } from './cockpitTheme';
 import { LanguageSelector } from '@/shared/components/LanguageSelector';
 
 export const Sidebar = ({ className }: { className?: string }) => {
@@ -12,7 +13,7 @@ export const Sidebar = ({ className }: { className?: string }) => {
                 </div>
             </div>
 
-            <nav aria-label="Navigation" className="flex flex-col gap-6 w-full px-4 flex-1 overflow-y-auto no-scrollbar items-center">
+            <nav aria-label="Primary" className="flex flex-col gap-6 w-full px-4 flex-1 overflow-y-auto no-scrollbar items-center">
                 {primaryNav.map((item) => (
                     <NavLink
                         key={item.path}
@@ -22,13 +23,13 @@ export const Sidebar = ({ className }: { className?: string }) => {
                         className={({ isActive }) => cn(
                             "group relative flex items-center justify-center p-3 rounded-xl transition-all duration-300 w-full aspect-square",
                             isActive
-                                ? "border border-[#7357D9]/35 bg-[#7357D9]/14 text-[#B7A7FF]"
+                                ? cockpitTheme.activeNav
                                 : "text-zinc-500 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10"
                         )}
                     >
                         {({ isActive }) => (
                             <>
-                                <item.icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive ? "text-[#B7A7FF]" : "text-zinc-500 group-hover:text-white")} strokeWidth={1.5} />
+                                <item.icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive ? cockpitTheme.accentText : "text-zinc-500 group-hover:text-white")} strokeWidth={1.5} />
 
                                 {/* Tooltip */}
                                 <span className="absolute left-full ml-4 bg-zinc-900/90 backdrop-blur border border-white/10 px-2 py-1 rounded text-[10px] uppercase tracking-wider text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 translate-x-[-10px] group-hover:translate-x-0 duration-200">
@@ -50,13 +51,13 @@ export const Sidebar = ({ className }: { className?: string }) => {
                         className={({ isActive }) => cn(
                             "group relative flex items-center justify-center p-3 rounded-xl transition-all duration-300 w-full aspect-square",
                             isActive
-                                ? "border border-[#7357D9]/35 bg-[#7357D9]/14 text-[#B7A7FF]"
+                                ? cockpitTheme.activeNav
                                 : "text-zinc-500 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10"
                         )}
                     >
                         {({ isActive }) => (
                             <>
-                                <item.icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive ? "text-[#B7A7FF]" : "text-zinc-500 group-hover:text-white")} strokeWidth={1.5} />
+                                <item.icon className={cn("h-6 w-6 transition-transform group-hover:scale-110", isActive ? cockpitTheme.accentText : "text-zinc-500 group-hover:text-white")} strokeWidth={1.5} />
                                 <span className="absolute left-full ml-4 bg-zinc-900/90 backdrop-blur border border-white/10 px-2 py-1 rounded text-[10px] uppercase tracking-wider text-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50 translate-x-[-10px] group-hover:translate-x-0 duration-200">
                                     {item.label}
                                 </span>

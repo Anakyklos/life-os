@@ -28,7 +28,7 @@ function renderNavigation(path: string, isDesktop: boolean) {
 
 it.each([false, true])('exposes one named navigation landmark in %s mode', (isDesktop) => {
   renderNavigation('/mvp', isDesktop);
-  expect(screen.getAllByRole('navigation', { name: 'Navigation' })).toHaveLength(1);
+  expect(screen.getAllByRole('navigation', { name: 'Primary' })).toHaveLength(1);
 });
 
 it.each([false, true])('marks exactly one destination active for every route in %s mode', (isDesktop) => {

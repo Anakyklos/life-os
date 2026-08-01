@@ -12,7 +12,7 @@ describe('Button Component', () => {
         render(<Button>Click me</Button>);
         const button = screen.getByRole('button', { name: /click me/i });
         expect(button).toBeInTheDocument();
-        expect(button).toHaveClass('bg-primary');
+        expect(button).toHaveClass('bg-primary-cta');
     });
 
     it('renders with different variants', () => {
