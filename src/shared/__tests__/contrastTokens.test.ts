@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const CONFIG_PATH = join(process.cwd(), 'tailwind.config.js');
+const COCKPIT_THEME_PATH = join(process.cwd(), 'src/app/layout/cockpitTheme.ts');
 
 function hexToRgb(hex: string): [number, number, number] {
   const match = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
@@ -31,6 +32,12 @@ function hexFromConfig(regex: RegExp): string {
   return hex;
 }
 
+function hexFromCockpitTheme(regex: RegExp): string {
+  const hex = readFileSync(COCKPIT_THEME_PATH, 'utf8').match(regex)?.[1];
+  if (!hex) throw new Error(`cockpit color token missing from cockpitTheme.ts: ${regex}`);
+  return `#${hex}`;
+}
+
 const primaryHex = hexFromConfig(/"primary":\s*"#([0-9a-f]{6})"/i);
 const primaryCtaHex = hexFromConfig(/"primary-cta":\s*"#([0-9a-f]{6})"/i);
 
@@ -48,6 +55,11 @@ describe('primary token contrast', () => {
 
   it('keeps the primary CTA >= 4.5:1 with white text', () => {
     expect(contrast(primaryCtaHex, '#ffffff')).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it('keeps the cockpit CTA hover state >= 4.5:1 with white text', () => {
+    const hoverHex = hexFromCockpitTheme(/primaryAction:\s*'[^']*hover:bg-\[#([0-9a-f]{6})\]/i);
+    expect(contrast(hoverHex, '#ffffff')).toBeGreaterThanOrEqual(4.5);
   });
 });
 /** @vitest-environment jsdom */
