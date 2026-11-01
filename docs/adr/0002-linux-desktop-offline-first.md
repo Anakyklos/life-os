@@ -107,4 +107,8 @@ Before LifeOS can be declared a functional Linux desktop application, the follow
 
 1. **Preservation of existing assets:** Existing web and Electron components remain functional in `local-dev` mode. No existing code, endpoints, or data files will be deleted until equivalent functionality and data parity are verified in the desktop target.
 2. **Coexistence:** The existing web development commands (`npm run dev`) remain documented as the means to execute the current codebase. They must not be mislabeled as the future product target.
-3. **Rollback strategy:** Because this change is documentary and normative, rollback consists simply of reverting documentation commits. No user data, database schemas, or package dependencies are put at risk.
+3. **Rollback semantics and human authority:**
+   - **Documentation rollback vs. human decision revocation:** Reverting documentation commits only rolls back the specific written text, formulation, or drafting errors in repository files. It does **not** revoke or negate the binding human decision made by Pedro on 2026-10-31.
+   - **Continuity of approved direction:** The Linux desktop offline-first product direction remains the active, authoritative strategic target unless and until Pedro explicitly makes a superseding human decision.
+   - **Handling documentary errors:** If this ADR or related documentation must be rolled back due to scope overreach, editorial flaws, or procedural issues, reverting the documentation commits returns the repository to an explicit drafting/triage state regarding document wording. A documentation rollback must **never** be interpreted as automatically re-approving the web application as the strategic product target.
+   - **Zero code or data risk:** Because no application code, database schemas, migration routines, or package dependencies were introduced or modified, rolling back documentation carries zero risk to user data or system integrity.
