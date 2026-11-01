@@ -4,7 +4,7 @@ Status: CANONICAL \
 Authority: repository documentation authority and search index \
 Audience: contributor; AI agent; operator/release; product/business; security \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
+Last reviewed: 2026-10-31 \
 Review by: 2027-01-14 \
 Update trigger: any document status, authority, owner, path, active exception or subject source changes \
 Supersedes: none \
@@ -21,22 +21,23 @@ Only one document may be CANONICAL for a subject. When two sources of equal or h
 
 | Subject | Current source | State | Authority source | Audience | Owner | Update trigger | Review by |
 |---|---|---|---|---|---|---|---|
-| Agent entrypoint | [`../AGENTS.md`](../AGENTS.md) | CANONICAL | repository governance; #82/#84 | contributor; AI agent | repository maintainer | agent authority or execution contract | 2027-01-14 |
-| Documentation authority | this file | CANONICAL | #89 and #131 | contributor; AI agent; operator/release; product/business; security | repository maintainer | any indexed field or path | 2027-01-14 |
-| Repository entry and quick start | [`../README.md`](../README.md) | CANONICAL | validated product/runtime decisions #85/#88 | end user; contributor; AI agent | repository maintainer | product surface, runtime, setup or key-path change | 2027-01-14 |
+| Agent entrypoint | [`../AGENTS.md`](../AGENTS.md) | CANONICAL | repository governance; #82/#84/#168 | contributor; AI agent | repository maintainer | agent authority or execution contract | 2027-01-14 |
+| Documentation authority | this file | CANONICAL | #89, #131 and #168 | contributor; AI agent; operator/release; product/business; security | repository maintainer | any indexed field or path | 2027-01-14 |
+| Repository entry and quick start | [`../README.md`](../README.md) | CANONICAL | validated product/runtime decisions #85/#88/#168 | end user; contributor; AI agent | repository maintainer | product surface, runtime, setup or key-path change | 2027-01-14 |
 | Governance map | [`governance/README.md`](governance/README.md) | CANONICAL | #84 and merged governance PR #99 | contributor; AI agent | repository maintainer | governance source or gate | 2027-01-14 |
 | Agent execution protocol | [`governance/agent-protocol.md`](governance/agent-protocol.md) | CANONICAL | #84 and repository governance | contributor; AI agent | repository maintainer | issue authorization, stop condition or execution protocol | 2027-01-14 |
 | Change-control policy | [`governance/policies.md`](governance/policies.md) | CANONICAL | #84 and #89 | contributor; AI agent | repository maintainer | dependency, docs, PR, ADR or rollback policy | 2027-01-14 |
 | Issue readiness and completion | [`governance/readiness-and-done.md`](governance/readiness-and-done.md) | CANONICAL | #84 | contributor; AI agent | repository maintainer | Definition of Ready/Done | 2027-01-14 |
 | Issue taxonomy | [`governance/labels.md`](governance/labels.md) | CANONICAL | #84/#90; `.github/labels.json` is executable catalog | contributor; AI agent | repository maintainer | label state machine or catalog | 2027-01-14 |
 | ADR lifecycle | [`adr/README.md`](adr/README.md) | CANONICAL | #84 and governance policy | contributor; AI agent | repository maintainer | ADR lifecycle or template | 2027-01-14 |
-| Product scope | [`product/canonical-mvp.md`](product/canonical-mvp.md) | CANONICAL | validated product decision #88 | product/business; contributor; AI agent | repository maintainer | approved user, scope or surface decision | 2027-01-14 |
+| Product scope | [`product/canonical-mvp.md`](product/canonical-mvp.md) | CANONICAL | validated product decision #88; reconciled by #168 | product/business; contributor; AI agent | repository maintainer | approved user, scope or surface decision | 2027-01-14 |
+| Target product direction | [`adr/0002-linux-desktop-offline-first.md`](adr/0002-linux-desktop-offline-first.md) | PROPOSAL | human decision by Pedro (2026-10-31); #168 | contributor; AI agent; operator/release; product/business; security | repository maintainer | maintainer ratification or desktop architecture decision | 2026-11-30 |
 | Product positioning | [`product/2026-07-16-product-positioning-brief.md`](product/2026-07-16-product-positioning-brief.md) | ACTIVE_SUPPORTING | provisional decision #88 under #82 | product/business; contributor; AI agent | repository maintainer | research, naming, audience or claim decision | 2026-10-16 |
 | Design-partner research | [`product/design-partner-research-protocol.md`](product/design-partner-research-protocol.md) | ACTIVE_SUPPORTING | research preparation #147 for discovery #104 | product/business; researcher; repository maintainer | repository maintainer | research question, population, collected field, consent, retention or decision rule | 2026-10-16 |
-| Canonical runtime | [`adr/0001-canonical-runtime.md`](adr/0001-canonical-runtime.md) | ACTIVE_SUPPORTING | provisional runtime decision #85 under #82 | contributor; AI agent; operator/release | repository maintainer | runtime, transport, persistence or release authority | 2026-10-16 |
+| Canonical runtime (implemented) | [`adr/0001-canonical-runtime.md`](adr/0001-canonical-runtime.md) | ACTIVE_SUPPORTING | #85 under #82; restricted to transitional maintenance of existing codebase; web direction superseded by Pedro's 2026-10-31 decision | contributor; AI agent; operator/release | repository maintainer | runtime, transport, persistence or release authority | 2027-01-14 |
 | Operating modes and trust boundaries | [`security/2026-07-16-operating-modes-threat-model.md`](security/2026-07-16-operating-modes-threat-model.md) | ACTIVE_SUPPORTING | provisional security decision #87 under #82 | security; operator/release; contributor; AI agent | repository maintainer | auth, secret, deployment or supported-mode boundary | 2026-10-16 |
 | Architecture navigation | [`architecture/README.md`](architecture/README.md) | ACTIVE_SUPPORTING | #85, #132 and #136 | contributor; AI agent | repository maintainer | architecture source, ADR or integration boundary | 2026-10-16 |
-| Current architecture map | [`architecture/overview.md`](architecture/overview.md) | ACTIVE_SUPPORTING | derived from #85 and reconciled by #132 | contributor; AI agent | repository maintainer | ADR, schema, router or auth boundary | 2026-10-16 |
+| Current architecture map | [`architecture/overview.md`](architecture/overview.md) | ACTIVE_SUPPORTING | derived from #85, #132, and reconciled by #168 | contributor; AI agent | repository maintainer | ADR, schema, router or auth boundary | 2027-01-14 |
 | Supabase boundary | [`architecture/supabase/README.md`](architecture/supabase/README.md) | ACTIVE_SUPPORTING | #85, #87 and #136 | contributor; AI agent; security | repository maintainer | Supabase consumer, Prisma authority or runtime-support change | 2026-10-16 |
 | MVP route/API contract | [`contracts/mvp-route-map.md`](contracts/mvp-route-map.md) | ACTIVE_SUPPORTING | executable API/routes reconciled by #132 | contributor; AI agent; operator/release | repository maintainer | route, payload, auth or repository contract | 2026-10-16 |
 | MVP telemetry vocabulary | [`contracts/telemetry-event-map.md`](contracts/telemetry-event-map.md) | ACTIVE_SUPPORTING | current in-product event contract | product/business; security; contributor; AI agent | repository maintainer | event, transport, processor or retention | 2027-01-14 |
@@ -64,7 +65,8 @@ Historical and audit material is indexed separately for provenance. It is not cu
 | Source | Scope and effect | Owner | Starts | Ends |
 |---|---|---|---|---|
 | [Recovery mandate #82](https://github.com/RenyEnnos/life-os/issues/82) | permits autonomous issue/PR/configuration execution, self-merge after evidence, and human review after execution; permanent secret/data/production limits remain | repository maintainer | explicit maintainer mandate | program completion, explicit revocation or a later human decision |
-| [Runtime decision #85](https://github.com/RenyEnnos/life-os/issues/85) | web/HTTP canonical; Electron experimental; PWA advisory; Android unsupported | repository maintainer | validated decision | superseding human decision/ADR or mandate termination review |
+| [Linux desktop direction #168](https://github.com/Anakyklos/life-os/issues/168) | target product is Linux desktop offline-first; supersedes web-first strategic target; implementation choices pending | repository maintainer | human decision (2026-10-31) | maintainer ratification or superseding product decision |
+| [Runtime decision #85](https://github.com/RenyEnnos/life-os/issues/85) | web/HTTP canonical for currently implemented codebase; web product direction superseded by #168; Electron experimental; PWA advisory; Android unsupported | repository maintainer | validated decision | superseding desktop implementation or mandate termination review |
 | [Security decision #87](https://github.com/RenyEnnos/life-os/issues/87) | only local-dev supported; shared modes fail closed until their gates pass | repository maintainer | validated decision | superseding security decision or mandate termination review |
 | [Product decision #88](https://github.com/RenyEnnos/life-os/issues/88) | narrow invite-only weekly loop and evidence-bounded claims | repository maintainer | validated decision | ratification, rejection or superseding product decision |
 | [GitHub controls #100](https://github.com/RenyEnnos/life-os/issues/100) | PR + two canonical checks for non-bypass actors; admin bypass and zero approvals remain provisional under #82 | repository maintainer | verified configuration | remote reconfiguration or post-mandate governance review |

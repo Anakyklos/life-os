@@ -1,9 +1,15 @@
 # Architecture Decision Records
 
-Status: canonical  
-Authority: durable architecture decisions  
-Owner: repository maintainer  
-Last reviewed: 2026-07-12
+Status: CANONICAL \
+Authority: durable architecture decisions and ADR index \
+Audience: contributor; AI agent \
+Owner: repository maintainer \
+Last reviewed: 2026-10-31 \
+Review by: 2027-01-14 \
+Update trigger: ADR addition, lifecycle change, or ADR template revision \
+Supersedes: none \
+Superseded by: none \
+Authorizes implementation: no
 
 ## Purpose
 
@@ -21,6 +27,13 @@ ADRs record decisions that are costly to reverse. They explain context and trade
 Only a human maintainer may mark an ADR accepted.
 
 A provisional ADR may direct ongoing recovery work only when an explicit maintainer mandate authorizes provisional decisions. It must name its rollback trigger and may not represent itself as human-ratified.
+
+## ADR Index
+
+| ADR | Title | State | Authority | Scope |
+|---|---|---|---|---|
+| [`0001`](0001-canonical-runtime.md) | Canonical runtime and release evidence | ACTIVE_SUPPORTING (`provisional`) | #85 under #82 | Documents the web/Express implementation and advisory Electron code currently in the repo; web-first direction superseded by Pedro's 2026-10-31 decision. |
+| [`0002`](0002-linux-desktop-offline-first.md) | Linux desktop offline-first product direction | PROPOSAL (`proposed`) | Human decision by Pedro (2026-10-31); #168 under #82 | Establishes Linux desktop offline-first as official target product; technical stack and implementation pending. |
 
 ## Naming
 
