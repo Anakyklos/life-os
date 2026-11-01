@@ -12,7 +12,7 @@ Superseded by: none \
 Authorizes implementation: no; a separate ready issue, dependency authorization, and applicable implementation and Linux validation gates remain mandatory \
 Related: issues #168, #172, #174, #175, #176, #177; ADR-0001, ADR-0002, ADR-0003, ADR-0004
 
-ADR lifecycle state: **accepted only for the five architecture decisions stated below**. This ADR does not accept the provisional technical selections in #176 and does not claim implementation, Linux validation, support, or release.
+ADR lifecycle state: **accepted only for the five architecture decisions stated below**. This ADR does not accept the delegated technical selections recorded as proposed in ADR-0006 through ADR-0008 and does not claim implementation, Linux validation, support, or release.
 
 ## Context
 
@@ -26,7 +26,7 @@ The product and architecture boundaries are distinct:
 - [ADR-0003](0003-linux-desktop-local-identity.md) remains canonical for the identity model approved in #172.
 - [ADR-0004](0004-linux-context-isolation.md) remains canonical for the isolated new context approved in #174.
 - This ADR records only the target host, interface/core languages, reversible migration, and essential offline operation approved in #175.
-- [#176](https://github.com/Anakyklos/life-os/issues/176) contains separate, delegated technical selections. They are provisional, pending their own ADR integration, and are not individually ratified by #175.
+- [#176](https://github.com/Anakyklos/life-os/issues/176) contains separate, delegated technical selections recorded as proposed in ADR-0006 through ADR-0008. They are not individually ratified by #175.
 
 ## Decision drivers
 
@@ -56,7 +56,7 @@ These five decisions are the full accepted scope of ADR-0005. Rust is the author
 | Tauri 2 host; React/TypeScript interface; Rust local core; incremental reversible migration; essential offline operation | Approved in #175; accepted here only within that scope. |
 | Local identity | Separately approved in #172 and recorded in ADR-0003; not expanded here. |
 | Isolated new Linux context and preservation of historical data | Separately approved in #174 and recorded in ADR-0004; not expanded here. |
-| SQLite, XDG namespace and exact paths, detailed Tauri IPC/capabilities, backup/recovery, and primary `.deb` package | Delegated technical selections in #176; provisional, not individually ratified by Pedro, and pending separate ADR integration, dependency authorization, and validation. |
+| SQLite, XDG namespace and exact paths, detailed Tauri IPC/capabilities, backup/recovery, and primary `.deb` package | Delegated selections in #176, recorded as proposed in ADR-0006 through ADR-0008; not individually ratified by Pedro, not implemented, and pending dependency authorization and validation. |
 | Linux runtime, installer, offline behavior, support matrix, and release | Not implemented or verified by this ADR. |
 
 Issue [#177](https://github.com/Anakyklos/life-os/issues/177) remains blocked until these decisions are formally integrated and any required dependencies are authorized. This ADR itself authorizes neither #177 implementation nor dependency changes.
@@ -87,9 +87,9 @@ Rust does not prove correct authorization, safe paths, correct recovery, or corr
 The initial path is:
 
 1. Build an **isolated Tauri shell with React** and local frontend assets. It must not import or initialize the legacy Electron bootstrap, Express server, historical stores, or sync engine.
-2. Produce and execute the first Linux **`.deb`** package. This is a migration milestone requested by #175 and aligned with Anakyklos packaging policy; the package-format selection remains provisional under #176 until its separate ADR and dependency authorization. Confirm installation and runtime dependencies on the declared Linux target before making a support claim.
-3. Add the **Rust core** with only explicitly authorized and validated commands. The exact Tauri IPC, permission, and capability contracts remain subject to #176's separate ADR; do not give the renderer general filesystem, SQL, shell, or network authority.
-4. Introduce **local persistence in a later slice**, only after the applicable #176 selection is separately recorded, authorized, and tested. The initial shell does not imply a database or recovery design.
+2. Produce and execute the first Linux **`.deb`** package. This is a migration milestone requested by #175 and aligned with Anakyklos packaging policy; ADR-0008 records the delegated package selection as proposed, pending ratification, dependency authorization, and real installation checks. Confirm installation and runtime dependencies on the declared Linux target before making a support claim.
+3. Add the **Rust core** with only explicitly authorized and validated commands. ADR-0007 records the delegated Tauri IPC and permission constraints as a proposal; do not implement commands until authorization and per-command review are complete, and do not give the renderer general filesystem, SQL, shell, or network authority.
+4. Introduce **local persistence in a later slice**, only after ADR-0006 is ratified or an explicit provisional mandate is recorded, dependencies are authorized, and the selected storage and recovery contracts are tested. The initial shell does not imply a database or recovery design.
 5. Move business rules to Rust **one bounded slice at a time**. Reuse React/TypeScript presentation where useful and preserve one authoritative implementation for each migrated rule.
 6. Add **equivalence and recovery tests** for each migrated behavior, including interruption and restart cases. Until real user-data migration is separately approved, recovery evidence must use synthetic fixtures.
 7. Retire the web runtime only after the desktop target demonstrably replaces its required behavior, migration and recovery preserve user data, and the remaining compatible readers or exports are no longer needed under a separately ready issue.

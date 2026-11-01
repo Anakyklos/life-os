@@ -1,7 +1,7 @@
 # ADR-0003: Local offline identity for Linux desktop
 
 Status: CANONICAL \
-Authority: identity model explicitly approved by Pedro in #172 (2026-10-31); later decisions #168, #174 and #175; technical selection under delegation in #176 (provisional) \
+Authority: identity model explicitly approved by Pedro in #172 (2026-10-31); later decisions #168, #174 and #175; technical selections delegated in #176 and recorded as proposed ADR-0006 through ADR-0008 \
 Audience: contributor; AI agent; security; operator/release; product/business \
 Owner: repository maintainer \
 Last reviewed: 2026-11-01 \
@@ -15,7 +15,7 @@ ADR lifecycle state: **accepted only for the identity model explicitly approved 
 
 ## Context
 
-Pedro's 2026-10-31 decision (#168 / ADR-0002) sets Linux desktop, offline-first operation as the target; the React/Express web runtime and experimental Electron adapters remain the **implemented** state. Later, Pedro approved an isolated new Linux data context (#174) and the Tauri 2 + React/TypeScript + Rust target architecture (#175). #176 records delegated technical selections for local data, XDG paths, IPC, recovery and packaging; these remain provisional, pending documentary integration and validation. None of these decisions establishes a working or released Linux runtime.
+Pedro's 2026-10-31 decision (#168 / ADR-0002) sets Linux desktop, offline-first operation as the target; the React/Express web runtime and experimental Electron adapters remain the **implemented** state. Later, Pedro approved an isolated new Linux data context (#174) and the Tauri 2 + React/TypeScript + Rust target architecture (#175). #176 records delegated technical selections for local data, XDG paths, IPC, recovery and packaging, now captured in proposed ADR-0006 through ADR-0008. They are not individually ratified and none establishes a working or released Linux runtime.
 
 Identity is fragmented across web accounts (`api/authRepository.ts`), experimental Electron sessions (`electron/auth/desktopSession.ts`, `electron/ipc/authHandler.ts`), MVP JSON workspaces indexed by `userId` (`api/mvpRepository.ts`) and legacy SQLite rows (`electron/db/BaseRepository.ts`). The latter uses a `local-user-id` fallback when no persisted session is found. `electron/data/desktopExport.ts` counts null/blank owners as unmapped but can omit records under another nonempty ID from both a particular user's export and its unmapped count.
 
@@ -48,7 +48,7 @@ The current legacy Electron bootstrap invokes `initDb()` (which may write schema
 5. A user's explicit choice to import or associate historical data constitutes **consent to the operation**, not cryptographic proof of historical ownership. Unknown owners must remain visible to an operator audit and preserved without silent adoption.
 6. Preserve historical records and their provenance. No legacy ID or record is silently adopted, and no second active source of truth is created for convenience.
 
-**Approval boundary:** Pedro's approval in #172 selected the identity *model* only. It did not approve a host, persistence, IPC, backup, package or migration design. Later decisions are separate: #174 approves the isolated new context; #175 approves the Tauri 2 + React/TypeScript + Rust target architecture; #176 records a delegated, provisional technical selection. This PR does not implement or independently ratify those later choices.
+**Approval boundary:** Pedro's approval in #172 selected the identity *model* only. It did not approve a host, persistence, IPC, backup, package or migration design. Later decisions are separate: #174 approves the isolated new context; #175 approves the Tauri 2 + React/TypeScript + Rust target architecture; #176 delegates technical selections recorded in proposed ADR-0006 through ADR-0008. This PR does not implement or independently ratify those later choices.
 
 ## Later decisions and technical selections
 
@@ -58,7 +58,7 @@ The current legacy Electron bootstrap invokes `initDb()` (which may write schema
 | [#172](https://github.com/Anakyklos/life-os/issues/172) | One implicit local profile with a stable LifeOS-owned ID and no mandatory application password | Approved by Pedro; this is the only decision this ADR marks `accepted`. |
 | [#174](https://github.com/Anakyklos/life-os/issues/174) | A new, isolated Linux data context; essential startup does not require opening or inspecting historical stores | Approved by Pedro and recorded in ADR-0004; historical files are preserved and never silently imported or associated. |
 | [#175](https://github.com/Anakyklos/life-os/issues/175) | Tauri 2 + React/TypeScript + Rust, implemented in reversible slices | Approved by Pedro as target architecture and recorded narrowly in ADR-0005; implementation and Linux validation remain pending. This does not expand the identity decision in this ADR. |
-| [#176](https://github.com/Anakyklos/life-os/issues/176) | New local SQLite controlled by Rust; a dedicated XDG namespace; restricted Tauri IPC; backup/recovery; `.deb` as the primary package | Selected technically under delegated authority. Provisional and pending separate ADR integration and validation; these details were not individually ratified by Pedro and are not implemented evidence. |
+| [#176](https://github.com/Anakyklos/life-os/issues/176) | New local SQLite controlled by Rust; a dedicated XDG namespace; restricted Tauri IPC; backup/recovery; `.deb` as the primary package | Selected technically under delegated authority and recorded in proposed ADR-0006 through ADR-0008. These details were not individually ratified by Pedro and are not implementation evidence. |
 
 ## Required invariants for future implementation
 
@@ -121,7 +121,7 @@ Existing web CI and Electron unit/smoke evidence do not satisfy these Linux rele
 
 ## Remaining decisions and implementation status
 
-The broad host architecture is human-approved in #175 and recorded narrowly in ADR-0005. The local SQLite/Rust, XDG namespace, restricted IPC, backup/recovery and primary `.deb` choices are recorded as a delegated technical selection in #176, provisional and pending separate ADR integration and validation. They were not approved as part of #172, and none is implemented or verified by this ADR or PR.
+The broad host architecture is human-approved in #175 and recorded narrowly in ADR-0005. The local SQLite/Rust, XDG namespace, restricted IPC, backup/recovery and primary `.deb` choices are delegated technical selections in #176, recorded as proposed ADR-0006 through ADR-0008. They were not approved as part of #172, are not individually ratified by Pedro, and none is implemented or verified by this ADR or PR.
 
 Optional historical import and identity-claim UX, encryption, additional profiles, the Linux support matrix, and retirement of web/legacy components remain separate decisions. Any implementation requires its own ready issue and evidence; this documentary ADR authorizes no runtime change.
 

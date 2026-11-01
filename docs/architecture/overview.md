@@ -18,8 +18,8 @@ This document describes the **currently implemented transitional/legacy** runtim
 - **DECIDED (Strategic Target):** Linux desktop application, offline-first. Essential loop operates entirely without internet access; data is locally owned by the user.
 - **DECIDED (Target Architecture, #175):** Tauri 2 host, React/TypeScript interface, Rust local core, incremental reversible migration, and essential offline operation.
 - **IMPLEMENTED (Transitional/Legacy Codebase):** The existing codebase implements the weekly operating loop inside a React 18 + Express web workspace with experimental Electron IPC adapters; this is not the Linux target runtime.
-- **PROVISIONAL (#176):** SQLite, XDG paths, detailed Tauri IPC, backup/recovery, and `.deb` packaging remain delegated technical selections pending separate ADR integration, validation, and dependency authorization.
-- **PENDING:** Linux runtime implementation and validation, detailed command/capability contracts, and release gates.
+- **PROPOSED ADRs (#176):** Delegated selections for SQLite, XDG paths, Tauri IPC, backup/recovery, and `.deb` are recorded in ADR-0006 through ADR-0008. The issue describes them as provisional, but the ADR lifecycle remains proposed because #82 does not expressly authorize provisional ADR status. Implementation, verification, dependency authorization, and Linux support remain pending.
+- **PENDING:** Linux runtime implementation and validation, detailed command/capability contracts, dependency authorization, and release gates.
 
 ## Current Implemented Architecture
 
