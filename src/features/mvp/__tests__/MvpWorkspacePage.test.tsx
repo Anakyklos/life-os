@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { MvpWorkspacePage } from '@/features/mvp/pages/MvpWorkspacePage';
@@ -73,6 +73,29 @@ describe('MVP workspace next step', () => {
     expect(screen.getAllByTestId('primary-next-step')).toHaveLength(1);
   });
 
+  it('renders one LifeOS action and one semantic cycle rail', async () => {
+    renderWorkspace('executing');
+
+    expect(await screen.findByRole('heading', { level: 1, name: 'Your week is active' })).toBeInTheDocument();
+    expect(screen.getAllByTestId('primary-next-step')).toHaveLength(1);
+
+    const rail = screen.getByRole('region', { name: 'This week' });
+    expect(within(rail).getByRole('heading', { level: 2, name: 'This week' })).toBeInTheDocument();
+    expect(within(rail).getByRole('list', { name: 'Weekly cycle' })).toBeInTheDocument();
+
+    const steps = within(rail).getAllByRole('listitem');
+    expect(steps).toHaveLength(4);
+    expect(steps.map((step) => step.textContent?.replace(/\s+/g, ' ').trim())).toEqual([
+      'Onboarding',
+      'Weekly review',
+      'Today',
+      'Reflection',
+    ]);
+    expect(steps[2]).toHaveAttribute('aria-current', 'step');
+
+    expect(screen.queryByText(/MVP|surface|phase|readiness|build/i)).not.toBeInTheDocument();
+  });
+
   it('does not expose a stale next step before hydration starts', () => {
     useMvpStore.setState({
       ...workspaceAt('onboarding'),
@@ -87,7 +110,7 @@ describe('MVP workspace next step', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Preparing your weekly workspace…')).toBeInTheDocument();
+    expect(screen.getByRole('status', { name: 'Preparing your LifeOS workspace' })).toBeInTheDocument();
     expect(screen.queryByTestId('primary-next-step')).not.toBeInTheDocument();
   });
 
@@ -98,5 +121,23 @@ describe('MVP workspace next step', () => {
 
     expect(screen.queryByText(/MVP Surfaces|Foundation Checklist|Prisma|backend|telemetry|Immediate next work/i)).not.toBeInTheDocument();
     expect(screen.queryByText('Admin Analytics')).not.toBeInTheDocument();
+  });
+
+  it('announces a failed workspace load through an alert region', async () => {
+    useMvpStore.setState({
+      ...workspaceAt('onboarding'),
+      isHydrating: false,
+      error: 'Offline',
+      hydrateWorkspace: vi.fn(),
+    });
+
+    render(
+      <MemoryRouter>
+        <MvpWorkspacePage />
+      </MemoryRouter>
+    );
+
+    const alert = await screen.findByRole('alert');
+    expect(alert).toHaveTextContent('Your weekly workspace could not be loaded.');
   });
 });

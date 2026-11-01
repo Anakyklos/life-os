@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { cn } from "@/shared/lib/cn";
+import { cockpitTheme } from "@/app/layout/cockpitTheme";
 import { Link } from "react-router-dom";
 
 export interface DockProps extends VariantProps<typeof dockVariants> {
@@ -72,6 +73,8 @@ export interface DockIconProps {
     children?: React.ReactNode;
     props?: unknown;
     href?: string;
+    label?: string;
+    active?: boolean;
     onClick?: () => void;
 }
 
@@ -82,6 +85,8 @@ const DockIcon = ({
     className,
     children,
     href,
+    label,
+    active,
     onClick,
     ...props
 }: DockIconProps) => {
@@ -123,7 +128,17 @@ const DockIcon = ({
 
     if (href) {
         return (
-            <Link to={href} className="focus:outline-none" onClick={onClick}>
+            <Link
+                to={href}
+                aria-label={label}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                    "rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+                    cockpitTheme.focusRing,
+                    active ? cockpitTheme.activeNav : "border border-transparent text-zinc-500",
+                )}
+                onClick={onClick}
+            >
                 {content}
             </Link>
         )

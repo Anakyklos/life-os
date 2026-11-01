@@ -26,7 +26,8 @@ export default {
         "glass": "rgba(24, 24, 27, 0.4)", // Standard Glass
         "glass-surface": "rgba(24, 24, 27, 0.4)",
         "glass-border": "rgba(255, 255, 255, 0.05)",
-        "primary": "#308ce8", // Electric Blue
+        "primary": "#308ce8", // Electric Blue - text/accent token
+        "primary-cta": "#1975d2", // CTA background: white text passes AA (4.65:1)
         "success": "#10b981",
         "warning": "#ef4444",
         "background-light": "#f6f7f8",

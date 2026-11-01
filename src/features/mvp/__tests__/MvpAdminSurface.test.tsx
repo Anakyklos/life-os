@@ -35,10 +35,24 @@ describe('MVP admin surface', () => {
 
     expect(await screen.findByText('Useful signal.')).toBeInTheDocument();
     expect(screen.getByText('user_feedback_submitted')).toBeInTheDocument();
+    expect(screen.getByText('Internal product signals')).toBeInTheDocument();
     expect(screen.getByText('Current loop state')).toBeInTheDocument();
     expect(screen.queryByText('Current step status')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Next build steps|Phase \d focus/i)).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /reset mvp workspace/i })).not.toBeInTheDocument();
     expect(hydrateWorkspace).not.toHaveBeenCalled();
     expect(getAdminOverview).toHaveBeenCalledOnce();
+  });
+
+  it('announces an administrative load failure through an alert region', async () => {
+    getAdminOverview.mockRejectedValue(new Error('forbidden'));
+
+    render(
+      <MemoryRouter>
+        <MvpSurfacePage surface="admin" />
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Administrative overview unavailable: forbidden');
   });
 });

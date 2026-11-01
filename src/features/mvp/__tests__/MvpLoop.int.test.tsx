@@ -101,8 +101,119 @@ describe('MVP loop integration', () => {
 
     expect(screen.getByRole('heading', { name: heading })).toBeInTheDocument();
     expect(screen.getByText(outcome)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Back to home' })).toHaveAttribute('href', '/mvp');
     expect(screen.getByText('Current step status')).toBeInTheDocument();
     expect(screen.queryByText('Current loop state')).not.toBeInTheDocument();
-    expect(screen.queryByText(/Next build steps|Phase \d focus|placeholder|analytics|persist|deterministic AI|cohort|backend/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Next build steps|Phase \d|placeholder|analytics|persist|deterministic AI|cohort|backend|MVP/i)).not.toBeInTheDocument();
+  });
+
+  it.each([
+    ['onboarding', [
+      ['textbox', 'Display name'],
+      ['textbox', 'What is breaking in the current planning system?'],
+      ['textbox', 'Goals'],
+    ]],
+    ['weekly-review', [
+      ['textbox', 'Primary focus area'],
+      ['spinbutton', 'Energy level'],
+      ['textbox', 'Wins from the previous cycle'],
+    ]],
+    ['reflection', [
+      ['textbox', 'Daily reflection'],
+      ['spinbutton', 'Rating'],
+      ['textbox', 'What created clarity or friction?'],
+    ]],
+  ] as const)('gives %s inputs accessible names', (surface, fields) => {
+    renderSurface(surface);
+
+    for (const [role, name] of fields) {
+      expect(screen.getByRole(role, { name })).toBeInTheDocument();
+    }
+  });
+
+  it('labels today inputs once the week is confirmed', () => {
+    const workspace = createEmptyWorkspace();
+    useMvpStore.setState({
+      ...workspace,
+      plan: {
+        ...workspace.plan,
+        id: 'plan-1',
+        generatedAt: '2026-07-18T12:10:00.000Z',
+        confirmedAt: '2026-07-18T12:20:00.000Z',
+        priorities: [{
+          id: 'priority-1',
+          title: 'Protect the weekly focus',
+          rationale: 'Keep the plan narrow.',
+          successMetric: 'One clear outcome',
+          actions: [{ id: 'action-1', title: 'Complete the next action', details: '', note: '', status: 'todo' }],
+        }],
+      },
+    });
+    renderSurface('today');
+
+    expect(screen.getByRole('spinbutton', { name: 'Energy level today' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Blockers' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Execution note' })).toBeInTheDocument();
+  });
+
+  it('renders guidance as a distinct panel instead of an equal card', () => {
+    renderSurface('onboarding');
+
+    expect(screen.getByRole('complementary', { name: 'Step guidance' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Build your starting context' })).toBeInTheDocument();
+  });
+
+  it('keeps exactly one primary action per surface', () => {
+    const primaryButtons = () =>
+      screen.getAllByRole('button').filter((button) => button.className.includes('bg-primary-cta'));
+
+    const emptyOnboarding = renderSurface('onboarding');
+    expect(primaryButtons()).toHaveLength(1);
+    emptyOnboarding.unmount();
+
+    const emptyReview = renderSurface('weekly-review');
+    expect(primaryButtons()).toHaveLength(1);
+    emptyReview.unmount();
+
+    const reflectionView = renderSurface('reflection');
+    expect(primaryButtons()).toHaveLength(1);
+    reflectionView.unmount();
+
+    useMvpStore.setState({
+      ...createEmptyWorkspace(),
+      plan: {
+        ...createEmptyWorkspace().plan,
+        generatedAt: '2026-07-18T12:10:00.000Z',
+        confirmedAt: '2026-07-18T12:20:00.000Z',
+        priorities: [{
+          id: 'priority-1',
+          title: 'Protect the weekly focus',
+          rationale: 'Keep the plan narrow.',
+          successMetric: 'One clear outcome',
+          actions: [{ id: 'action-1', title: 'Complete the next action', details: '', note: '', status: 'todo' }],
+        }],
+      },
+    });
+    const todayView = renderSurface('today');
+    expect(primaryButtons()).toHaveLength(1);
+    expect(primaryButtons()[0]).toHaveAccessibleName('Save daily check-in');
+    todayView.unmount();
+
+    useMvpStore.setState({
+      ...createEmptyWorkspace(),
+      plan: { ...createEmptyWorkspace().plan, generatedAt: '2026-07-18T12:10:00.000Z' },
+    });
+    const generatedReview = renderSurface('weekly-review');
+    expect(primaryButtons()).toHaveLength(1);
+    expect(primaryButtons()[0]).toHaveAccessibleName('Confirm weekly plan');
+    expect(screen.getByRole('button', { name: 'Generate weekly plan' })).not.toHaveClass('bg-primary-cta');
+    generatedReview.unmount();
+  });
+
+  it('announces workspace sync errors through an alert region', () => {
+    useMvpStore.setState({ error: 'Connection lost', hydrateWorkspace: vi.fn() });
+    renderSurface('onboarding');
+
+    expect(screen.getByRole('alert')).toHaveTextContent('Workspace sync failed: Connection lost');
   });
 });

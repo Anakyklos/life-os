@@ -156,7 +156,7 @@ export function OnboardingFlow({ onClose }: OnboardingFlowProps) {
                       : "bg-surface border-border hover:border-primary/50"
                   )}
                 >
-                  <div className={cn("w-5 h-5 rounded border flex items-center justify-center", formData.goals?.includes(goal) ? "bg-primary border-primary" : "bg-transparent border-muted-foreground")}>
+                  <div className={cn("w-5 h-5 rounded border flex items-center justify-center", formData.goals?.includes(goal) ? "bg-primary-cta border-primary" : "bg-transparent border-muted-foreground")}>
                     {formData.goals?.includes(goal) && <Check size={12} className="text-primary-foreground" />}
                   </div>
                   <span className="text-sm font-medium">{goal}</span>
@@ -290,7 +290,7 @@ export function OnboardingFlow({ onClose }: OnboardingFlowProps) {
                 currentStep === s.id
                   ? "border-primary bg-primary/10 text-primary shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]"
                   : currentStep > s.id
-                    ? "border-primary bg-primary text-primary-foreground"
+                    ? "border-primary bg-primary-cta text-primary-foreground"
                     : "border-border bg-surface text-muted-foreground"
               )}
             >
@@ -329,7 +329,7 @@ export function OnboardingFlow({ onClose }: OnboardingFlowProps) {
           )}
 
           {currentStep === steps.length - 1 ? (
-            <Button onClick={nextStep} className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button onClick={nextStep} className="flex-1 bg-primary-cta text-primary-foreground hover:bg-primary-cta/90">
               INICIALIZAR SISTEMA <Rocket className="ml-2" size={16} />
             </Button>
           ) : (
