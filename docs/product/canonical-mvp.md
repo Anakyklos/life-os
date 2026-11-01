@@ -4,22 +4,28 @@ Status: CANONICAL \
 Authority: validated product decision #88 \
 Audience: product/business; contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
+Last reviewed: 2026-10-31 \
 Review by: 2027-01-14 \
-Update trigger: approved user, scope or product-surface decision \
+Update trigger: approved user, scope, target product or product-surface decision \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no
 
 ## Product Decision
 
-LifeOS should be framed in this repository as one product only: an invite-only weekly operating loop implemented inside the existing React + Express workspace.
+By binding human decision on 2026-10-31 (Pedro, issue #168, proposal [`docs/adr/0002-linux-desktop-offline-first.md`](../adr/0002-linux-desktop-offline-first.md)), LifeOS will cease to be developed as a web product and will become a **Linux desktop application, offline-first**, where all essential functionality is fully usable without internet connectivity.
+
+The essential product scope remains strictly focused on one core loop:
+
+- **Target product (DECIDED):** Linux desktop application, offline-first.
+- **Implemented codebase (IMPLEMENTED):** Implemented in this repository as the narrow weekly operating loop inside the existing React + Express workspace (with experimental Electron adaptors).
+- **Technical stack (PENDING):** Definitive desktop runtime, IPC, and local persistence remain subject to evaluation and approval before implementation.
 
 ## What This Means
 
 The MVP is not the entire LifeOS productivity suite.
 
-The MVP is the narrow loop that helps a design partner:
+The MVP is the narrow loop that helps a user:
 
 1. define context and constraints
 2. generate and confirm a focused weekly plan
@@ -73,8 +79,10 @@ Backend contract:
 
 - positioning LifeOS as a general productivity suite for MVP messaging
 - treating dashboard, tasks, habits, calendar, journal, health, finances, projects, university, AI assistant, focus, gamification, or design preview as MVP-defining surfaces
-- claiming Electron is the current default product runtime
+- claiming Linux desktop support or packaging is currently implemented or released
+- claiming Electron or web is the definitive shipped runtime
 - sync or cloud-readiness claims
+- requiring network connectivity for the essential loop in the target product
 - calling the admin view partner-facing
 - treating client route visibility, localhost, invite metadata, or a Vite flag as administrator authority
 

@@ -1,23 +1,27 @@
 # LifeOS Architecture Overview
 
 Status: ACTIVE_SUPPORTING \
-Authority: derived current architecture under ADR-0001 and #85 \
+Authority: derived current architecture under ADR-0001, ADR-0002, and #168 \
 Audience: contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
-Review by: 2026-10-16 \
+Last reviewed: 2026-10-31 \
+Review by: 2027-01-14 \
 Update trigger: ADR, runtime, schema, route, authentication or persistence boundary change \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no
 
-This document reflects the current default runtime and product boundary in the repository. The canonical MVP framing is `docs/product/canonical-mvp.md`.
+This document describes the **currently implemented** runtime in the repository. The strategic product direction is defined in [`docs/adr/0002-linux-desktop-offline-first.md`](../adr/0002-linux-desktop-offline-first.md) and canonical product scope in [`docs/product/canonical-mvp.md`](../product/canonical-mvp.md).
 
-## Architecture Decision
+## Architecture State
 
-Treat the current application as a React + Express product with one canonical MVP slice: the invite-only weekly operating loop under `/mvp`.
+- **DECIDED (Strategic Target):** Linux desktop application, offline-first. Essential loop operates entirely without internet access; data is locally owned by the user.
+- **IMPLEMENTED (Current Codebase):** The existing codebase implements the weekly operating loop inside a React 18 + Express web workspace with experimental Electron IPC adaptors.
+- **PENDING (Technical Decisions):** Desktop application framework, local persistence engine (e.g. SQLite), IPC mechanism, local identity model, and Linux packaging pipeline.
 
-Electron code and the broader productivity suite remain present in the repo, but they are not the authoritative product boundary for current MVP planning.
+## Current Implemented Architecture
+
+Treat the current application as a React + Express development codebase with one canonical MVP slice: the weekly operating loop under `/mvp`. Electron code and the broader productivity suite remain present, but they are not the authoritative released product today.
 
 ## High-Level Runtime
 
@@ -80,8 +84,9 @@ In scope:
 Out of scope for canonical MVP framing:
 
 - the broader suite as the primary product story
-- Electron as the default release story
-- sync, cloud, or production-grade analytics claims beyond the implemented contract
+- claiming Linux desktop support or packaging is already implemented
+- claiming Electron or web is the definitive release story
+- sync, cloud, or remote hosting requirements for the essential product loop
 
 ## Documentation Precedence
 

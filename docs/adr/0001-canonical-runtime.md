@@ -4,12 +4,18 @@ Status: ACTIVE_SUPPORTING \
 Authority: provisional runtime decision #85 under recovery mandate #82 \
 Audience: contributor; AI agent; operator/release \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
-Review by: 2026-10-16 \
+Last reviewed: 2026-10-31 \
+Review by: 2027-01-14 \
 Update trigger: runtime, transport, persistence, distribution or release-evidence decision \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: yes, only within the active #82 exception and exact ready issue
+
+> [!NOTE]
+> **Product Direction Update (2026-10-31):**
+> On 2026-10-31, repository maintainer Pedro decided that LifeOS will cease to be developed as a web product and will become a Linux desktop application, offline-first (see proposal `docs/adr/0002-linux-desktop-offline-first.md` and authorizing issue #168).
+> That human decision supersedes the web-first strategic product direction previously assumed here.
+> However, because technical desktop architecture selections remain pending and no desktop migration has been implemented, ADR-0001 remains `ACTIVE_SUPPORTING` to govern the implemented React + Express web runtime and existing development workflows (`npm run dev`) present in the repository today. It is not declared formally replaced by an unapproved technical ADR.
 
 ## Context
 

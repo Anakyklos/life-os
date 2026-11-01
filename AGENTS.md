@@ -4,13 +4,13 @@ Status: CANONICAL \
 Authority: repository-wide operating rules for AI agents \
 Audience: contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
+Last reviewed: 2026-10-31 \
 Review by: 2027-01-14 \
 Update trigger: agent authority, issue authorization, validation or active exception changes \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no \
-Related: issues #82, #84, #85, #89, #91, #100, #131
+Related: issues #82, #84, #85, #88, #89, #91, #100, #131, #168; ADR-0001, ADR-0002
 
 ## Purpose
 
@@ -29,7 +29,11 @@ Unless a human-approved decision, ready implementation issue, or exact active ex
 - turn proposals, old PRDs, comments, or historical plans into requirements;
 - begin a second issue after completing the assigned one.
 
-Runtime exception: `docs/adr/0001-canonical-runtime.md` is the active provisional runtime decision under the maintainer's autonomous recovery mandate. Agents must treat web/HTTP as canonical, Electron as experimental, PWA as experimental, and Android as unsupported. This does not authorize removing non-canonical runtimes; removal still requires a ready implementation issue and migration evidence.
+Target product and runtime rules:
+- **Product direction (DECIDED):** On 2026-10-31, repository maintainer Pedro decided that LifeOS will cease to be developed as a web product and will become a Linux desktop application, offline-first (issue #168; proposal `docs/adr/0002-linux-desktop-offline-first.md`). Agents must not advance or evolve LifeOS as a web-first or cloud-hosted product.
+- **Implemented codebase (IMPLEMENTED):** The codebase currently implemented in the repository remains the React + Express web application and experimental Electron code governed by `docs/adr/0001-canonical-runtime.md`.
+- **Architectural choices (PENDING):** Desktop framework, local persistence, IPC, and Linux packaging are pending technical selection and maintainer approval.
+- Agents must not remove non-canonical runtimes, rewrite code, or claim Linux desktop support without an explicit ready implementation issue and verified evidence.
 
 ## Authority order
 
@@ -98,7 +102,7 @@ Minimum expectations for code changes normally include:
 - relevant tests
 - `npm run build`
 
-Runtime-specific checks are governed by the active runtime ADR. Canonical merge evidence is `web / static-and-unit` plus `web / canonical-e2e`; Electron smoke remains advisory and neither runtime's evidence proves the other.
+Runtime-specific checks are governed by the active runtime ADRs. Canonical merge evidence for the current codebase is `web / static-and-unit` plus `web / canonical-e2e`; Electron smoke remains advisory and neither runtime's evidence proves the other. Web check runs do not constitute evidence of Linux desktop or offline-first support.
 
 ## Detailed governance
 

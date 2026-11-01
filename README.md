@@ -4,51 +4,62 @@ Status: CANONICAL \
 Authority: repository entry and contributor quick start \
 Audience: end user; contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-07-18 \
+Last reviewed: 2026-10-31 \
 Review by: 2027-01-14 \
 Update trigger: product surface, runtime, setup or key-path change \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no
 
-LifeOS is currently implemented in this repo as an invite-only weekly operating loop inside the existing React + Express application. This does not imply a shared or production release.
+> [!IMPORTANT]
+> **Product Direction (2026-10-31):**
+> By binding human decision from repository maintainer Pedro (2026-10-31, issue #168, proposal [`docs/adr/0002-linux-desktop-offline-first.md`](docs/adr/0002-linux-desktop-offline-first.md)), LifeOS will cease to be developed as a web product and will become a **Linux desktop application, offline-first**, with all essential features fully usable without an internet connection.
+>
+> **Status distinction:**
+> - **DECIDED:** Linux desktop offline-first is the official target product.
+> - **IMPLEMENTED:** The repository currently implements the weekly operating loop inside the existing React 18 + Vite and Express web workspace, alongside experimental Electron adaptors.
+> - **PENDING:** Desktop framework selection, IPC mechanism, definitive local storage, local identity, Linux packaging, and Linux CI gates.
+>
+> The setup instructions below run the **currently implemented** web codebase; they do not represent a released or completed Linux desktop package.
 
-Use `docs/README.md` to select the current authority for each subject. Equal- or higher-authority conflicts are stop-and-report conditions, not an invitation to select the newest file.
+Use [`docs/README.md`](docs/README.md) to select the current authority for each subject. Equal- or higher-authority conflicts are stop-and-report conditions, not an invitation to select the newest file.
 
 ## Current Product Boundary
 
-In scope for the canonical MVP:
+In scope for the essential loop:
 
-- invite-gated account creation and login
+- invite-gated account creation and login (in current web runtime)
 - the `/mvp` workspace and its four user-facing loop surfaces:
-  - onboarding
-  - weekly review
-  - today
-  - reflection
+  - onboarding (context and constraints)
+  - weekly review (planning)
+  - today (focused daily actions)
+  - reflection (weekly review feedback)
 - an internal-only admin analytics surface at `/mvp/admin`
 - the current `/api/mvp/*` contract in `api/app.ts`
 
-Out of scope for the canonical MVP:
+Out of scope for the essential product:
 
 - marketing LifeOS as a broad productivity suite
 - treating the dashboard, habits, calendar, journal, health, finances, projects, university, focus, AI assistant, or gamification routes as MVP-defining surfaces
-- claiming Electron is the default shipped runtime
-- sync or cloud-readiness claims beyond the implemented MVP contract
+- claiming Linux desktop support or packaging is currently implemented or released
+- claiming Electron or web is the definitive shipped runtime
+- cloud sync or remote hosting requirements for core functionality
 
-## Runtime
+## Current Implemented Runtime
 
-Default development and build flow:
+Default development and build flow for the current codebase:
 
 - frontend: React 18 + Vite
 - backend: Express
 - auth: file-backed invite registration and session cookies in both MVP repository modes
 - MVP workspace/recovery persistence: explicitly selected with `LIFEOS_MVP_REPOSITORY=file|prisma`; Prisma changes only this store and also requires `DATABASE_URL`, which never selects a repository by itself
 
-Important note:
+Current runtime status:
 
-- Electron code exists in this repo, but it is not the canonical MVP runtime because the default scripts, implemented weekly-loop API, and current route shell all center the web workspace.
+- The web runtime (`npm run dev`) is the functional development environment today.
+- Electron code exists in this repo as an experimental adaptor, but it is not the canonical or verified Linux desktop package. Technical evaluation of the definitive desktop runtime is tracked in proposal [`docs/adr/0002-linux-desktop-offline-first.md`](docs/adr/0002-linux-desktop-offline-first.md).
 
-## Quick Start
+## Quick Start (Current Web Codebase)
 
 Install dependencies:
 
