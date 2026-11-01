@@ -96,6 +96,9 @@ screenshots/
 
 # Testsprite tests temporary files
 testsprite_tests/tmp/
+
+# Isolated agent workspaces
+.worktrees/
 testsprite_tests/__pycache__/
 testsprite_tests/*.html
 

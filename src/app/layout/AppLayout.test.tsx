@@ -39,10 +39,12 @@ it('reserves mobile content clearance without a second fixed navigation wrapper'
     </MemoryRouter>
   );
 
-  expect(screen.getByTestId('mobile-navigation-slot')).not.toHaveClass('fixed');
+  expect(screen.getByTestId('app-shell')).toHaveClass('bg-[#08070B]');
+  expect(screen.getByTestId('lifeos-atmosphere')).toBeInTheDocument();
   expect(screen.getByTestId('route-content')).toHaveClass(
     'pb-32',
     'md:pb-0'
   );
+  expect(screen.getAllByRole('navigation', { name: 'Navigation' })).toHaveLength(1);
   expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
 });

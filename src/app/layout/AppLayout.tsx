@@ -38,13 +38,16 @@ export function AppLayout() {
     }, [desktopApp]);
 
     return (
-        <div className="relative min-h-[100dvh] w-full bg-background-dark text-zinc-200 font-display selection:bg-primary/30 flex flex-row overflow-x-hidden">
+        <div
+            data-testid="app-shell"
+            className="relative flex min-h-[100dvh] w-full flex-row overflow-x-hidden bg-[#08070B] font-display text-zinc-200 selection:bg-[#7357D9]/30"
+        >
             <ScrollToTop />
 
             {/* ATMOSPHERE LAYER - Fixed Background Elements */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                {/* 1. Global Noise */}
-                <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay" />
+            <div data-testid="lifeos-atmosphere" className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_-10%,rgba(115,87,217,0.16),transparent_38%),linear-gradient(180deg,#0D0C12_0%,#08070B_56%)]" />
+                <div className="absolute inset-0 bg-noise opacity-[0.025] mix-blend-overlay" />
             </div>
 
 
@@ -56,15 +59,7 @@ export function AppLayout() {
                 }} />
             ) : null}
 
-            {/* Sidebar Navigation - Always Visible on Desktop */}
-            <aside className="hidden md:flex flex-col w-24 h-screen shrink-0 z-50">
-                <NavigationSystem />
-            </aside>
-
-            {/* Mobile Navigation - Always Visible on Mobile */}
-            <div className="md:hidden" data-testid="mobile-navigation-slot">
-                <NavigationSystem />
-            </div>
+            <NavigationSystem />
 
             {/* Main Content Area */}
             <main className="flex-1 min-h-screen overflow-y-auto relative z-10 w-full">

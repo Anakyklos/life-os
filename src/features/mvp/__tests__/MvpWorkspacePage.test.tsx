@@ -73,6 +73,17 @@ describe('MVP workspace next step', () => {
     expect(screen.getAllByTestId('primary-next-step')).toHaveLength(1);
   });
 
+  it('renders one LifeOS action and one semantic cycle rail', async () => {
+    renderWorkspace('executing');
+
+    expect(await screen.findByRole('heading', { level: 1, name: 'Your week is active' })).toBeInTheDocument();
+    expect(screen.getAllByTestId('primary-next-step')).toHaveLength(1);
+    expect(screen.getByRole('list', { name: 'Weekly cycle' })).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(4);
+    expect(screen.getByText('Today').closest('li')).toHaveAttribute('aria-current', 'step');
+    expect(screen.queryByText(/MVP|surface|phase|readiness|build/i)).not.toBeInTheDocument();
+  });
+
   it('does not expose a stale next step before hydration starts', () => {
     useMvpStore.setState({
       ...workspaceAt('onboarding'),
@@ -87,7 +98,7 @@ describe('MVP workspace next step', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Preparing your weekly workspace…')).toBeInTheDocument();
+    expect(screen.getByRole('status', { name: 'Preparing your LifeOS workspace' })).toBeInTheDocument();
     expect(screen.queryByTestId('primary-next-step')).not.toBeInTheDocument();
   });
 

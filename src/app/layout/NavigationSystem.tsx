@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { Sidebar } from './Sidebar';
 import { Dock, DockIcon } from '@/shared/ui/premium/Dock';
@@ -10,6 +11,7 @@ type NavigationSystemProps = {
 
 export function NavigationSystem({ isSanctuaryActive = false }: NavigationSystemProps) {
     const isDesktop = useMediaQuery("(min-width: 768px)");
+    const { pathname } = useLocation();
 
     const slideProps = {
         animate: { x: isSanctuaryActive ? '-100%' : '0%' },
@@ -31,13 +33,30 @@ export function NavigationSystem({ isSanctuaryActive = false }: NavigationSystem
                 {...slideProps}
                 className="w-auto max-w-[92vw] pointer-events-auto"
             >
-                <Dock className="bg-black/40 border-white/5 shadow-2xl backdrop-blur-xl px-4 py-3 gap-3 overflow-x-auto hide-scrollbar max-w-full justify-center">
-                    {mobileNav.map((item) => (
-                        <DockIcon key={item.path} href={item.path}>
-                            <item.icon className="size-6 text-zinc-300" />
-                        </DockIcon>
-                    ))}
-                </Dock>
+                <nav aria-label="Navigation">
+                    <Dock
+                        magnification={48}
+                        distance={96}
+                        className="max-w-[calc(100vw-1.5rem)] gap-1 border-white/10 bg-[#0D0C12]/92 px-2 py-2 backdrop-blur-xl"
+                    >
+                        {mobileNav.map((item) => {
+                            const active = pathname === item.path;
+
+                            return (
+                                <DockIcon
+                                    key={item.path}
+                                    href={item.path}
+                                    label={item.label}
+                                    active={active}
+                                    magnification={48}
+                                    distance={96}
+                                >
+                                    <item.icon className={active ? "size-6 text-[#B7A7FF]" : "size-6 text-zinc-300"} />
+                                </DockIcon>
+                            );
+                        })}
+                    </Dock>
+                </nav>
             </motion.div>
         </div>
     );

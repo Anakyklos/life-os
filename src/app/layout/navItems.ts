@@ -1,25 +1,28 @@
 import type { LucideIcon } from 'lucide-react';
 import {
-  Compass,
+  CalendarRange,
+  Home,
+  ListChecks,
   Settings,
+  Sparkles,
 } from 'lucide-react';
 
 export type NavItem = {
   label: string;
   path: string;
   icon: LucideIcon;
+  end?: boolean;
 };
 
 export const primaryNav: NavItem[] = [
-  { label: 'MVP', path: '/mvp', icon: Compass },
+  { label: 'Home', path: '/mvp', icon: Home, end: true },
+  { label: 'Week', path: '/mvp/weekly-review', icon: CalendarRange },
+  { label: 'Today', path: '/mvp/today', icon: ListChecks },
+  { label: 'Reflect', path: '/mvp/reflection', icon: Sparkles },
 ];
 
 export const secondaryNav: NavItem[] = [
-  { label: 'Configurações', path: '/settings', icon: Settings },
+  { label: 'Settings', path: '/settings', icon: Settings },
 ];
 
-// Compact list for the mobile dock
-export const mobileNav: NavItem[] = [
-  { label: 'MVP', path: '/mvp', icon: Compass },
-  { label: 'Ajustes', path: '/settings', icon: Settings },
-];
+export const mobileNav = [...primaryNav, ...secondaryNav];

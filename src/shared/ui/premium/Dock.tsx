@@ -72,6 +72,8 @@ export interface DockIconProps {
     children?: React.ReactNode;
     props?: unknown;
     href?: string;
+    label?: string;
+    active?: boolean;
     onClick?: () => void;
 }
 
@@ -82,6 +84,8 @@ const DockIcon = ({
     className,
     children,
     href,
+    label,
+    active,
     onClick,
     ...props
 }: DockIconProps) => {
@@ -123,7 +127,18 @@ const DockIcon = ({
 
     if (href) {
         return (
-            <Link to={href} className="focus:outline-none" onClick={onClick}>
+            <Link
+                to={href}
+                aria-label={label}
+                aria-current={active ? 'page' : undefined}
+                className={cn(
+                    "rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9B87F5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#08070B]",
+                    active
+                        ? "border border-[#7357D9]/35 bg-[#7357D9]/14 text-[#B7A7FF]"
+                        : "border border-transparent text-zinc-500",
+                )}
+                onClick={onClick}
+            >
                 {content}
             </Link>
         )
