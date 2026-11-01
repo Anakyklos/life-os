@@ -4,7 +4,7 @@ Status: CANONICAL \
 Authority: repository entry and contributor quick start \
 Audience: end user; contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-10-31 \
+Last reviewed: 2026-11-01 \
 Review by: 2027-01-14 \
 Update trigger: product surface, runtime, setup or key-path change \
 Supersedes: none \
@@ -17,8 +17,10 @@ Authorizes implementation: no
 >
 > **Status distinction:**
 > - **DECIDED:** Linux desktop offline-first is the official target product.
-> - **IMPLEMENTED:** The repository currently implements the weekly operating loop inside the existing React 18 + Vite and Express web workspace, alongside experimental Electron adaptors.
-> - **PENDING:** Desktop framework selection, IPC mechanism, definitive local storage, local identity, Linux packaging, and Linux CI gates.
+> - **DECIDED (architecture, #175 / [ADR-0005](docs/adr/0005-linux-tauri-rust-architecture.md)):** Tauri 2 host, React/TypeScript interface, Rust local core, incremental reversible migration, and essential offline operation.
+> - **IMPLEMENTED (transitional/legacy):** The repository still implements the weekly loop in the React 18 + Vite and Express web workspace, with experimental Electron adapters. This is not the Linux target runtime.
+> - **PROVISIONAL (#176):** SQLite, XDG paths, detailed Tauri IPC, backup/recovery, and `.deb` packaging are delegated technical selections pending separate ADR integration, validation, and dependency authorization.
+> - **PENDING:** Linux implementation and verification, detailed command/capability contracts, and the remaining migration and release gates.
 >
 > The setup instructions below run the **currently implemented** web codebase; they do not represent a released or completed Linux desktop package.
 
@@ -57,7 +59,7 @@ Default development and build flow for the current codebase:
 Current runtime status:
 
 - The web runtime (`npm run dev`) is the functional development environment today.
-- Electron code exists in this repo as an experimental adaptor, but it is not the canonical or verified Linux desktop package. Technical evaluation of the definitive desktop runtime is tracked in proposal [`docs/adr/0002-linux-desktop-offline-first.md`](docs/adr/0002-linux-desktop-offline-first.md).
+- The web runtime and experimental Electron code are transitional implementations, not the selected Linux target. The target architecture is recorded in [`docs/adr/0005-linux-tauri-rust-architecture.md`](docs/adr/0005-linux-tauri-rust-architecture.md); no Linux package or runtime is implemented or verified.
 
 ## Quick Start (Current Web Codebase)
 

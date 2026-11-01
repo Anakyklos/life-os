@@ -4,19 +4,21 @@ Status: PROPOSAL \
 Authority: human decision by Pedro (2026-10-31) and authorizing issue #168 under recovery program #82 \
 Audience: contributor; AI agent; operator/release; product/business; security \
 Owner: repository maintainer \
-Last reviewed: 2026-10-31 \
+Last reviewed: 2026-11-01 \
 Review by: 2026-11-30 \
 Update trigger: maintainer ratification, desktop architecture decision, persistence or IPC proposal \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no (documentary only; technical choices require separate ready issues and ADR ratification) \
-Related: issues #82, #85, #88, #168; ADR-0001
+Related: issues #82, #85, #88, #168, #172, #174, #175, #176; ADR-0001, ADR-0003, ADR-0004, ADR-0005
 
 ## Lifecycle notice
 
 ADR lifecycle state: `proposed`.
 
 This document records a binding normative human decision by the repository maintainer regarding product direction. It does not authorize immediate code rewrites or runtime removals. In accordance with repository governance, an ADR remains `proposed` until explicitly marked `accepted` (or `provisional` under a formal recovery mandate) by the human maintainer. It establishes strategic intent without inventing technical approval for unselected stacks.
+
+Later approvals are separately scoped: #172 records the local identity model in ADR-0003, #174 records the isolated transition context in ADR-0004, and #175 records the target architecture in ADR-0005. The delegated technical selections in #176 remain provisional and are not ratified by those decisions.
 
 ## Context
 
@@ -66,11 +68,12 @@ To prevent false claims and execution errors, all contributors and AI agents mus
 
 - **DECIDED:** Linux desktop offline-first is the official target product.
 - **IMPLEMENTED:** The repository currently contains a functional web implementation (React 18 + Vite frontend and Express HTTP API) alongside experimental Electron adaptors and legacy SQLite code.
-- **PENDENTE (Pending):** Desktop framework selection, UI/domain decoupling, IPC transport, definitive storage engine, local identity model, Linux packaging, and automated Linux CI verification.
+- **PROVISIONAL (#176):** Delegated technical selections for SQLite, XDG paths, restricted Tauri IPC, backup/recovery, and primary `.deb` packaging; pending separate ADR integration, dependency authorization, and validation.
+- **PENDING:** Detailed UI/domain and command contracts, implementation, Linux verification, and release gates. Local identity and isolated-context decisions are recorded separately in ADR-0003 and ADR-0004.
 
-## Pending Decisions
+## Pending Decisions at the Time of #168
 
-The following architectural decisions are explicitly open and must be evaluated under future issues before implementation:
+The following list preserves the state and alternatives recorded for the 2026-10-31 decision. It is a historical snapshot, not a live list of unresolved choices: #172 resolved local identity and #175 resolved the target host/UI/core architecture. The remaining #176 technical selections are provisional pending separate ADR integration.
 
 1. **Desktop application framework:** Evaluating Electron (reusing existing scaffolding and React UI), Tauri (lightweight webview with Rust backend), native GUI frameworks (Qt, GTK), or alternative desktop hosts.
 2. **UI and domain separation:** Defining clear architectural boundaries between frontend presentation and domain logic to facilitate testing and potential runtime migration.
@@ -85,7 +88,9 @@ The following architectural decisions are explicitly open and must be evaluated 
 
 ## Future Options for Technical Investigation
 
-Without committing to any stack prematurely, the following architectural avenues warrant technical exploration:
+This option list is retained as the #168 decision-time comparison. Issue #175 later selected Tauri 2 + React/TypeScript + Rust as the target architecture; this historical list does not reopen that selection. It does not ratify #176's provisional storage, path, IPC, recovery, or package choices.
+
+At the time of #168, without committing to a stack prematurely, the following architectural avenues warranted technical exploration:
 
 - **Option A — Electron evolution:** Leverage existing Electron configuration in `electron/` and `src/features/mvp/api/mvp.api.ts`, refining IPC handlers and transitioning persistence from remote/Express to local SQLite/better-sqlite3. Lowest friction for existing React codebase, but carries Electron memory and bundle size overhead.
 - **Option B — Tauri / Webview host:** Package the React/Vite UI with Tauri, utilizing a lightweight Rust core for system integration, file I/O, and SQLite persistence. Yields significantly smaller binary and memory footprint, but introduces Rust toolchain dependencies.

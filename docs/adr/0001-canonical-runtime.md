@@ -4,7 +4,7 @@ Status: ACTIVE_SUPPORTING \
 Authority: provisional runtime decision #85 under recovery mandate #82 (restricted by human decision 2026-10-31 and #168 to transitional maintenance of existing codebase) \
 Audience: contributor; AI agent; operator/release \
 Owner: repository maintainer \
-Last reviewed: 2026-10-31 \
+Last reviewed: 2026-11-01 \
 Review by: 2027-01-14 \
 Update trigger: runtime, transport, persistence, distribution or release-evidence decision \
 Supersedes: none \
@@ -15,7 +15,7 @@ Authorizes implementation: restricted (transitional maintenance and bug fixes of
 > **Product Direction Update (2026-10-31):**
 > On 2026-10-31, repository maintainer Pedro decided that LifeOS will cease to be developed as a web product and will become a Linux desktop application, offline-first (see proposal `docs/adr/0002-linux-desktop-offline-first.md` and authorizing issue #168).
 > That human decision supersedes the web-first strategic product direction previously assumed here.
-> However, because technical desktop architecture selections remain pending and no desktop migration has been implemented, ADR-0001 remains `ACTIVE_SUPPORTING` to govern the implemented React + Express web runtime and existing development workflows (`npm run dev`) present in the repository today. Implementation authority is strictly restricted to transitional maintenance and bug fixes of the existing codebase under an exact ready issue; it does not authorize expanding LifeOS as a web-first product. It is not declared formally replaced by an unapproved technical ADR.
+> On 2026-11-01, Pedro separately approved Tauri 2 + React/TypeScript + Rust as the target architecture in #175; ADR-0005 records that narrow decision. ADR-0001 remains `ACTIVE_SUPPORTING` only for current React + Express web behavior, experimental Electron paths, and their development evidence. Those implementations are transitional/legacy, not the selected Linux target. The web-first decision and release framing below preserve the #85 decision-time record and do not take precedence over #168 or ADR-0005. The target decision does not establish implementation or authorize web-runtime removal; exact ready issues and migration evidence remain required.
 
 ## Context
 
@@ -32,7 +32,7 @@ The product decision in `docs/product/2026-07-16-product-positioning-brief.md` n
 
 This ADR records an operationally active but reversible decision. It is not represented as maintainer ratification. The maintainer may accept, reject or supersede it later.
 
-While provisional, it takes operational precedence for runtime classification over conflicting desktop-first release documents and broad-suite historical plans. Those documents remain present until #89 classifies or reconciles them.
+This supporting record governs only current legacy-runtime behavior and its web evidence lanes. It does not take operational precedence over the Linux product direction in #168 or the target architecture in ADR-0005.
 
 ## Current runtime, adapter and data map
 
