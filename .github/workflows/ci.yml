@@ -47,7 +47,7 @@ jobs:
 
   canonical-e2e:
     name: web / canonical-e2e
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       LIFEOS_OPERATING_MODE: local-dev
     steps:
