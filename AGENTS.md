@@ -10,7 +10,7 @@ Update trigger: agent authority, issue authorization, validation or active excep
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no \
-Related: issues #82, #84, #85, #88, #89, #91, #100, #131, #168, #172, #174, #175, #176, #177; ADR-0001 through ADR-0005
+Related: issues #82, #84, #85, #88, #89, #91, #100, #131, #168, #172, #174, #175, #176, #177; ADR-0001 through ADR-0008
 
 ## Purpose
 
@@ -32,7 +32,7 @@ Unless a human-approved decision, ready implementation issue, or exact active ex
 Target product and runtime rules:
 - **Product direction (DECIDED):** On 2026-10-31, repository maintainer Pedro decided that LifeOS will cease to be developed as a web product and will become a Linux desktop application, offline-first (issue #168; proposal `docs/adr/0002-linux-desktop-offline-first.md`). Agents must not advance or evolve LifeOS as a web-first or cloud-hosted product.
 - **Target architecture (DECIDED, narrow scope):** Pedro approved Tauri 2 as the Linux desktop host, React/TypeScript as the interface, Rust as the privileged local core, incremental reversible migration, and essential offline operation in #175; `docs/adr/0005-linux-tauri-rust-architecture.md` records only that scope.
-- **Technical selections (PROVISIONAL):** Issue #176 records delegated selections for SQLite, XDG paths, detailed Tauri IPC, backup/recovery, and `.deb` packaging. They remain provisional pending their own ADR integration, validation, and dependency authorization; #175 did not ratify them.
+- **Technical selections (PROPOSED):** Issue #176 delegates technical selection for SQLite, XDG paths, Tauri IPC, backup/recovery, and `.deb` packaging; ADR-0006 through ADR-0008 record the selections as proposed. They are not individually ratified by Pedro, and the indexed scope of #82 does not explicitly authorize the ADR lifecycle `provisional`. No implementation or dependency is authorized.
 - **Implemented codebase (IMPLEMENTED, transitional/legacy):** The repository still contains the React + Express web application and experimental Electron code described by `docs/adr/0001-canonical-runtime.md`. No Linux target runtime or package is implemented or validated.
 - Agents must not remove non-canonical runtimes, rewrite code, or claim Linux desktop support without an explicit ready implementation issue and verified evidence.
 

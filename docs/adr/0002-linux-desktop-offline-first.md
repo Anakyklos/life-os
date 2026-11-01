@@ -18,7 +18,7 @@ ADR lifecycle state: `proposed`.
 
 This document records a binding normative human decision by the repository maintainer regarding product direction. It does not authorize immediate code rewrites or runtime removals. In accordance with repository governance, an ADR remains `proposed` until explicitly marked `accepted` (or `provisional` under a formal recovery mandate) by the human maintainer. It establishes strategic intent without inventing technical approval for unselected stacks.
 
-Later approvals are separately scoped: #172 records the local identity model in ADR-0003, #174 records the isolated transition context in ADR-0004, and #175 records the target architecture in ADR-0005. The delegated technical selections in #176 remain provisional and are not ratified by those decisions.
+Later approvals are separately scoped: #172 records the local identity model in ADR-0003, #174 records the isolated transition context in ADR-0004, and #175 records the target architecture in ADR-0005. The delegated selections in #176 are captured as proposed ADR-0006 through ADR-0008; they are not accepted or individually ratified by those decisions.
 
 ## Context
 
@@ -68,12 +68,12 @@ To prevent false claims and execution errors, all contributors and AI agents mus
 
 - **DECIDED:** Linux desktop offline-first is the official target product.
 - **IMPLEMENTED:** The repository currently contains a functional web implementation (React 18 + Vite frontend and Express HTTP API) alongside experimental Electron adaptors and legacy SQLite code.
-- **PROVISIONAL (#176):** Delegated technical selections for SQLite, XDG paths, restricted Tauri IPC, backup/recovery, and primary `.deb` packaging; pending separate ADR integration, dependency authorization, and validation.
+- **PROPOSED ADRs (#176):** Delegated technical selections for SQLite, XDG paths, restricted Tauri IPC, backup/recovery, and primary `.deb` packaging are recorded in ADR-0006 through ADR-0008. They are not individually ratified, are not implemented, and do not authorize dependencies.
 - **PENDING:** Detailed UI/domain and command contracts, implementation, Linux verification, and release gates. Local identity and isolated-context decisions are recorded separately in ADR-0003 and ADR-0004.
 
 ## Pending Decisions at the Time of #168
 
-The following list preserves the state and alternatives recorded for the 2026-10-31 decision. It is a historical snapshot, not a live list of unresolved choices: #172 resolved local identity and #175 resolved the target host/UI/core architecture. The remaining #176 technical selections are provisional pending separate ADR integration.
+The following list preserves the state and alternatives recorded for the 2026-10-31 decision. It is a historical snapshot, not a live list of unresolved choices: #172 resolved local identity and #175 resolved the target host/UI/core architecture. #176 delegated the remaining technical selections; they are recorded as proposals in ADR-0006 through ADR-0008.
 
 1. **Desktop application framework:** Evaluating Electron (reusing existing scaffolding and React UI), Tauri (lightweight webview with Rust backend), native GUI frameworks (Qt, GTK), or alternative desktop hosts.
 2. **UI and domain separation:** Defining clear architectural boundaries between frontend presentation and domain logic to facilitate testing and potential runtime migration.
@@ -88,7 +88,7 @@ The following list preserves the state and alternatives recorded for the 2026-10
 
 ## Future Options for Technical Investigation
 
-This option list is retained as the #168 decision-time comparison. Issue #175 later selected Tauri 2 + React/TypeScript + Rust as the target architecture; this historical list does not reopen that selection. It does not ratify #176's provisional storage, path, IPC, recovery, or package choices.
+This option list is retained as the #168 decision-time comparison. Issue #175 later selected Tauri 2 + React/TypeScript + Rust as the target architecture; this historical list does not reopen that selection. It does not ratify the proposed #176 storage, path, IPC, recovery, or package selections recorded in ADR-0006 through ADR-0008.
 
 At the time of #168, without committing to a stack prematurely, the following architectural avenues warranted technical exploration:
 

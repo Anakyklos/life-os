@@ -27,9 +27,9 @@ Historical SQLite and JSON stores, sidecars, workspaces, and backups may contain
 | [#172](https://github.com/Anakyklos/life-os/issues/172) | One implicit local profile with a stable LifeOS-owned identifier and no mandatory application password | Approved by Pedro; recorded in ADR-0003, which remains canonical for identity. |
 | [#174](https://github.com/Anakyklos/life-os/issues/174) | Start with a new context isolated from historical stores; no required history inspection or automatic import/association | Approved by Pedro; this is the only decision this ADR marks `accepted`. |
 | [#175](https://github.com/Anakyklos/life-os/issues/175) | Tauri 2 + React/TypeScript + Rust target architecture | Approved separately by Pedro and recorded narrowly in ADR-0005; implementation evidence remains pending. This does not expand the isolation decision in this ADR. |
-| [#176](https://github.com/Anakyklos/life-os/issues/176) | New Rust-controlled SQLite, dedicated XDG namespace, restricted Tauri IPC, backup/recovery, and primary `.deb` | Selected technically under delegated authority; provisional, pending documentary integration and validation, and not individually ratified by Pedro. |
+| [#176](https://github.com/Anakyklos/life-os/issues/176) | New Rust-controlled SQLite, dedicated XDG namespace, restricted Tauri IPC, backup/recovery, and primary `.deb` | Delegated selections recorded in proposed ADR-0006 through ADR-0008; not individually ratified by Pedro or implemented. |
 
-The authority of #175 and #176 is not expanded by their inclusion here. In particular, this ADR does not claim that any of these technologies or contracts have been implemented. Any recovery safeguards required for a future legacy-data operation are prerequisites for that separately authorized work; they do not ratify #176's provisional backup/recovery selection, and this ADR selects no storage or backup technology.
+The authority of #175 and #176 is not expanded by their inclusion here. In particular, this ADR does not claim that any of these technologies or contracts have been implemented. Any recovery safeguards required for a future legacy-data operation are prerequisites for that separately authorized work; they do not ratify the proposed backup/recovery selection in ADR-0006, and this ADR selects no storage or backup technology.
 
 ## Decision — approved by Pedro
 

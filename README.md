@@ -19,7 +19,7 @@ Authorizes implementation: no
 > - **DECIDED:** Linux desktop offline-first is the official target product.
 > - **DECIDED (architecture, #175 / [ADR-0005](docs/adr/0005-linux-tauri-rust-architecture.md)):** Tauri 2 host, React/TypeScript interface, Rust local core, incremental reversible migration, and essential offline operation.
 > - **IMPLEMENTED (transitional/legacy):** The repository still implements the weekly loop in the React 18 + Vite and Express web workspace, with experimental Electron adapters. This is not the Linux target runtime.
-> - **PROVISIONAL (#176):** SQLite, XDG paths, detailed Tauri IPC, backup/recovery, and `.deb` packaging are delegated technical selections pending separate ADR integration, validation, and dependency authorization.
+> - **PROPOSED ADRs (#176):** Delegated selections for SQLite, XDG paths, Tauri IPC, backup/recovery, and `.deb` are recorded in ADR-0006 through ADR-0008. Issue #176 describes the selections as provisional, but the ADR lifecycle remains proposed because #82 does not expressly authorize provisional ADR status. The selections are not individually ratified, implemented, or dependency-authorized.
 > - **PENDING:** Linux implementation and verification, detailed command/capability contracts, and the remaining migration and release gates.
 >
 > The setup instructions below run the **currently implemented** web codebase; they do not represent a released or completed Linux desktop package.
