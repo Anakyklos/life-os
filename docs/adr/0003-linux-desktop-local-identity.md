@@ -56,8 +56,8 @@ The current legacy Electron bootstrap invokes `initDb()` (which may write schema
 |---|---|---|
 | [#168](https://github.com/Anakyklos/life-os/issues/168) | Linux desktop, offline-first product direction | Approved by Pedro; current repository implementation remains web/experimental Electron. |
 | [#172](https://github.com/Anakyklos/life-os/issues/172) | One implicit local profile with a stable LifeOS-owned ID and no mandatory application password | Approved by Pedro; this is the only decision this ADR marks `accepted`. |
-| [#174](https://github.com/Anakyklos/life-os/issues/174) | A new, isolated Linux data context; essential startup does not require opening or inspecting historical stores | Approved by Pedro; historical files are preserved and never silently imported or associated. Separate ADR integration remains pending. |
-| [#175](https://github.com/Anakyklos/life-os/issues/175) | Tauri 2 + React/TypeScript + Rust, implemented in reversible slices | Approved by Pedro as target architecture; separate ADR integration, implementation and Linux validation remain pending. |
+| [#174](https://github.com/Anakyklos/life-os/issues/174) | A new, isolated Linux data context; essential startup does not require opening or inspecting historical stores | Approved by Pedro and recorded in ADR-0004; historical files are preserved and never silently imported or associated. |
+| [#175](https://github.com/Anakyklos/life-os/issues/175) | Tauri 2 + React/TypeScript + Rust, implemented in reversible slices | Approved by Pedro as target architecture and recorded narrowly in ADR-0005; implementation and Linux validation remain pending. This does not expand the identity decision in this ADR. |
 | [#176](https://github.com/Anakyklos/life-os/issues/176) | New local SQLite controlled by Rust; a dedicated XDG namespace; restricted Tauri IPC; backup/recovery; `.deb` as the primary package | Selected technically under delegated authority. Provisional and pending separate ADR integration and validation; these details were not individually ratified by Pedro and are not implemented evidence. |
 
 ## Required invariants for future implementation
@@ -121,7 +121,7 @@ Existing web CI and Electron unit/smoke evidence do not satisfy these Linux rele
 
 ## Remaining decisions and implementation status
 
-The broad host architecture is human-approved in #175. The local SQLite/Rust, XDG namespace, restricted IPC, backup/recovery and primary `.deb` choices are recorded as a delegated technical selection in #176, provisional and pending separate ADR integration and validation. They were not approved as part of #172, and none is implemented or verified by this ADR or PR.
+The broad host architecture is human-approved in #175 and recorded narrowly in ADR-0005. The local SQLite/Rust, XDG namespace, restricted IPC, backup/recovery and primary `.deb` choices are recorded as a delegated technical selection in #176, provisional and pending separate ADR integration and validation. They were not approved as part of #172, and none is implemented or verified by this ADR or PR.
 
 Optional historical import and identity-claim UX, encryption, additional profiles, the Linux support matrix, and retirement of web/legacy components remain separate decisions. Any implementation requires its own ready issue and evidence; this documentary ADR authorizes no runtime change.
 

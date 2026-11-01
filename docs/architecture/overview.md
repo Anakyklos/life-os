@@ -1,23 +1,25 @@
 # LifeOS Architecture Overview
 
 Status: ACTIVE_SUPPORTING \
-Authority: derived current architecture under ADR-0001, ADR-0002, and #168 \
+Authority: current implementation facts under ADR-0001; target direction under ADR-0002 and target architecture under ADR-0005/#175 \
 Audience: contributor; AI agent \
 Owner: repository maintainer \
-Last reviewed: 2026-10-31 \
+Last reviewed: 2026-11-01 \
 Review by: 2027-01-14 \
 Update trigger: ADR, runtime, schema, route, authentication or persistence boundary change \
 Supersedes: none \
 Superseded by: none \
 Authorizes implementation: no
 
-This document describes the **currently implemented** runtime in the repository. The strategic product direction is defined in [`docs/adr/0002-linux-desktop-offline-first.md`](../adr/0002-linux-desktop-offline-first.md) and canonical product scope in [`docs/product/canonical-mvp.md`](../product/canonical-mvp.md).
+This document describes the **currently implemented transitional/legacy** runtime in the repository. The strategic product direction is defined in [`docs/adr/0002-linux-desktop-offline-first.md`](../adr/0002-linux-desktop-offline-first.md), the target architecture in [`docs/adr/0005-linux-tauri-rust-architecture.md`](../adr/0005-linux-tauri-rust-architecture.md), and canonical product scope in [`docs/product/canonical-mvp.md`](../product/canonical-mvp.md).
 
 ## Architecture State
 
 - **DECIDED (Strategic Target):** Linux desktop application, offline-first. Essential loop operates entirely without internet access; data is locally owned by the user.
-- **IMPLEMENTED (Current Codebase):** The existing codebase implements the weekly operating loop inside a React 18 + Express web workspace with experimental Electron IPC adaptors.
-- **PENDING (Technical Decisions):** Desktop application framework, local persistence engine (e.g. SQLite), IPC mechanism, local identity model, and Linux packaging pipeline.
+- **DECIDED (Target Architecture, #175):** Tauri 2 host, React/TypeScript interface, Rust local core, incremental reversible migration, and essential offline operation.
+- **IMPLEMENTED (Transitional/Legacy Codebase):** The existing codebase implements the weekly operating loop inside a React 18 + Express web workspace with experimental Electron IPC adapters; this is not the Linux target runtime.
+- **PROVISIONAL (#176):** SQLite, XDG paths, detailed Tauri IPC, backup/recovery, and `.deb` packaging remain delegated technical selections pending separate ADR integration, validation, and dependency authorization.
+- **PENDING:** Linux runtime implementation and validation, detailed command/capability contracts, and release gates.
 
 ## Current Implemented Architecture
 
