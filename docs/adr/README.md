@@ -34,6 +34,7 @@ A provisional ADR may direct ongoing recovery work only when an explicit maintai
 |---|---|---|---|---|
 | [`0001`](0001-canonical-runtime.md) | Canonical runtime and release evidence | ACTIVE_SUPPORTING (`provisional`) | #85 under #82 | Documents the web/Express implementation and advisory Electron code currently in the repo; web-first direction superseded by Pedro's 2026-10-31 decision. |
 | [`0002`](0002-linux-desktop-offline-first.md) | Linux desktop offline-first product direction | PROPOSAL (`proposed`) | Human decision by Pedro (2026-10-31); #168 under #82 | Establishes Linux desktop offline-first as official target product; technical stack and implementation pending. |
+| [`0003`](0003-linux-desktop-local-identity.md) | Offline local identity model | CANONICAL (`accepted`) | Human approval by Pedro (2026-10-31), recorded by #172 | One implicit offline local profile with a stable LifeOS-owned ID and no mandatory app-specific password; preservation rules; implementation technologies remain pending. |
 
 ## Naming
 
